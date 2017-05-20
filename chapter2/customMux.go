@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
 	"net/http"
-        "math/rand"
 )
 
 type CustomServeMux struct {
@@ -19,7 +19,7 @@ func (p *CustomServeMux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 func giveRandom(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w,"Your random number is: %f", rand.Float64())
+	fmt.Fprintf(w, "Your random number is: %f", rand.Float64())
 }
 
 func main() {
