@@ -11,14 +11,14 @@ type CustomServeMux struct {
 
 func (p *CustomServeMux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path == "/" {
-		sayhelloName(w, r)
+		giveRandom(w, r)
 		return
 	}
 	http.NotFound(w, r)
 	return
 }
 
-func sayhelloName(w http.ResponseWriter, r *http.Request) {
+func giveRandom(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w,"Your random number is: %f", rand.Float64())
 }
 
