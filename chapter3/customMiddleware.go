@@ -15,7 +15,7 @@ func middleware(handler http.Handler) http.Handler {
 }
 
 func mainLogic(w http.ResponseWriter, r *http.Request) {
-	// Business logic goes here 
+	// Business logic goes here
 	fmt.Println("Executing mainHandler...")
 	w.Write([]byte("OK"))
 }
