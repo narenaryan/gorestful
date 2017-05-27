@@ -29,7 +29,7 @@ func getCommandOutput(command string, arguments ...string) string{
 }
 
 func goVersion(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
-        fmt.Fprintf(w, getCommandOutput("/usr/local/go/bin/go", "version"))
+        fmt.Fprintf(w, getCommandOutput("/usr/local/bin/go", "version"))
 }
 
 func getFileContent(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
