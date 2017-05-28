@@ -15,7 +15,6 @@ func mainLogic(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	// Creating UUID Version 4
 	r := mux.NewRouter()
 	r.HandleFunc("/", mainLogic)
 	loggedRouter := handlers.LoggingHandler(os.Stdout, r)
