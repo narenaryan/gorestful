@@ -24,7 +24,7 @@ func main() {
 	if err != nil {
 		log.Println("Error in creating table")
 	} else {
-		log.Println("Successfully created table books")
+		log.Println("Successfully created table books!")
 	}
 	statement.Exec()
 	// Create
@@ -47,5 +47,5 @@ func main() {
 	//Delete
 	statement, _ = db.Prepare("delete from books where id=?")
 	statement.Exec(1)
-	log.Println("Succesfully deleted the book in database")
+	log.Println("Successfully deleted the book in database!")
 }
