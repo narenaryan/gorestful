@@ -16,6 +16,7 @@ type Book struct {
 
 func main() {
 	db, err := sql.Open("sqlite3", "./books.db")
+	log.Println(db)
 	if err != nil {
 		log.Println(err)
 	}
