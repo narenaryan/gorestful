@@ -53,7 +53,7 @@ func (t *TrainResource) Register(container *restful.Container) {
 	container.Add(ws)
 }
 
-// GET http://localhost:8080/trains/1
+// GET http://localhost:8000/v1/trains/1
 func (t TrainResource) getTrain(request *restful.Request, response *restful.Response) {
 	id := request.PathParameter("train-id")
 	err := DB.QueryRow("select ID, DRIVER_NAME, OPERATING_STATUS FROM train where id=?", id).Scan(&t.ID, &t.DriverName, &t.OperatingStatus)
@@ -66,7 +66,7 @@ func (t TrainResource) getTrain(request *restful.Request, response *restful.Resp
 	}
 }
 
-// POST http://localhost:8080/trains
+// POST http://localhost:8000/v1/trains
 func (t TrainResource) createTrain(request *restful.Request, response *restful.Response) {
 	log.Println(request.Request.Body)
 	decoder := json.NewDecoder(request.Request.Body)
@@ -87,6 +87,7 @@ func (t TrainResource) createTrain(request *restful.Request, response *restful.R
 	}
 }
 
+// DELETE http://localhost:8000/v1/trains/1
 func (t TrainResource) removeTrain(request *restful.Request, response *restful.Response) {
 	id := request.PathParameter("train-id")
 	statement, _ := DB.Prepare("delete from train where id=?")
@@ -111,7 +112,7 @@ func main() {
 	t := TrainResource{}
 	t.Register(wsContainer)
 
-	log.Printf("start listening on localhost:8080")
-	server := &http.Server{Addr: ":8080", Handler: wsContainer}
+	log.Printf("start listening on localhost:8000")
+	server := &http.Server{Addr: ":8000", Handler: wsContainer}
 	log.Fatal(server.ListenAndServe())
 }
