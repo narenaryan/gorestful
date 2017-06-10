@@ -17,10 +17,12 @@ const station = `
         )
 `
 const schedule = `
-	CREATE TABLE IF NOT EXISTS route (
+	CREATE TABLE IF NOT EXISTS schedule (
 	  ID INT PRIMARY KEY NOT NULL,
           TRAIN_ID INT,
           STATION_ID INT,
-          ARRIVAL_TIME TIME
+          ARRIVAL_TIME TIME,
+          FOREIGN KEY (TRAIN_ID) REFERENCES train(ID),
+          FOREIGN KEY (STATION_ID) REFERENCES station(ID)
         )
 `
