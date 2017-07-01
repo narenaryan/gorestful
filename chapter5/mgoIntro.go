@@ -8,16 +8,16 @@ import (
 )
 
 type Movie struct {
-        Name string
-        Year string
-        Directors []string
-        Writers []string
-        BoxOffice
+        Name string `bson:"name"`
+        Year string `bson:"year"`
+        Directors []string `bson:"directors"`
+        Writers []string  `bson:"writers"`
+        BoxOffice `bson:"boxOffice"`
 }
 
 type BoxOffice struct {
-        Budget uint64
-        Gross uint64
+        Budget uint64 `bson:"budget"`
+        Gross uint64  `bson:"gross"`
 }
 
 func main() {
@@ -45,7 +45,7 @@ func main() {
         }
 
         result := Movie{}
-        err = c.Find(bson.M{"year": "2008"}).One(&result)
+        err = c.Find(bson.M{"boxOffice.budget": bson.M{"$gt": 150000000}}).One(&result)
         if err != nil {
                 log.Fatal(err)
         }
