@@ -9,8 +9,8 @@
 		_id: ObjectId("3d3b10f41efad96g110vcf4f"),
 	}, 
 	{
-		slug: "home"
-		name: "Home",
+		slug: "shirts"
+		name: "Shirts",
 		_id: ObjectId("603d3eb0ft41ead96110cf4f"),
 	}]
 }
