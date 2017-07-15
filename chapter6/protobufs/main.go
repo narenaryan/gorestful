@@ -16,6 +16,11 @@ func main() {
 			{Number: "555-4321", Type: pb.Person_HOME},
 		},
 	}
+
+	p1 := &pb.Person{}
 	body, _ := proto.Marshal(p)
-	fmt.Println(body)
+	_ = proto.Unmarshal(body, p1)
+	fmt.Println("Original struct loaded from proto file:", p)
+	fmt.Println("Marshalled proto data: ", body)
+	fmt.Println("Unmarshalled struct: ", p1)
 }
