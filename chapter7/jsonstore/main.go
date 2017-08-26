@@ -24,10 +24,10 @@ type UserResponse struct {
 	Data interface{} `json:"data"`
 }
 
-// GetUser fetches the original URL for the given encoded(short) string
-func (driver *DBClient) GetUsersByName(w http.ResponseWriter, r *http.Request) {
+// GetUsersByFirstName fetches the original URL for the given encoded(short) string
+func (driver *DBClient) GetUsersByFirstName(w http.ResponseWriter, r *http.Request) {
 	var users []models.User
-	name := r.FormValue("name")
+	name := r.FormValue("first_name")
 	// Handle response details
 	var query = "select * from \"user\" where data->>'first_name'=?"
 	driver.db.Raw(query, name).Scan(&users)
@@ -87,7 +87,7 @@ func main() {
 	// Attach an elegant path with handler
 	r.HandleFunc("/v1/user/{id:[a-zA-Z0-9]*}", dbclient.GetUser).Methods("GET")
 	r.HandleFunc("/v1/user", dbclient.PostUser).Methods("POST")
-	r.HandleFunc("/v1/user", dbclient.GetUsersByName).Methods("GET")
+	r.HandleFunc("/v1/user", dbclient.GetUsersByFirstName).Methods("GET")
 	srv := &http.Server{
 		Handler: r,
 		Addr:    "127.0.0.1:8000",
