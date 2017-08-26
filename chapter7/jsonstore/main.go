@@ -18,27 +18,26 @@ type DBClient struct {
 	db *gorm.DB
 }
 
-// Model the record struct
-type Record struct {
-	ID  int    `json:"id"`
-	URL string `json:"url"`
+type Response struct {
+	User models.User `json:"user"`
+	Data interface{} `json:"data"`
 }
 
 // GetOriginalURL fetches the original URL for the given encoded(short) string
 func (driver *DBClient) GetOriginalURL(w http.ResponseWriter, r *http.Request) {
+	var user = models.User{}
 	vars := mux.Vars(r)
 	// Handle response details
-	log.Println(vars)
-	var err string = ""
-	if err != "" {
-		w.Write([]byte("yes"))
-	} else {
-		w.WriteHeader(http.StatusOK)
-		w.Header().Set("Content-Type", "application/json")
-		responseMap := map[string]interface{}{"url": ""}
-		response, _ := json.Marshal(responseMap)
-		w.Write(response)
-	}
+	driver.db.First(&user, vars["id"])
+	var userData interface{}
+	// Unmarshal JSON string to interface
+	json.Unmarshal([]byte(user.Data), &userData)
+	var response = Response{User: user, Data: userData}
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Content-Type", "application/json")
+	//responseMap := map[string]interface{}{"url": ""}
+	respJSON, _ := json.Marshal(response)
+	w.Write(respJSON)
 }
 
 // GenerateShortURL adds URL to DB and gives back shortened string

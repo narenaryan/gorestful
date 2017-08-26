@@ -19,7 +19,6 @@ func InitDB() (*sql.DB, error) {
 			return nil, err
 		}
 		res, err := stmt.Exec()
-		log.Println(res)
 		if err != nil {
 			log.Println(err)
 			return nil, err

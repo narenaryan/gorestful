@@ -8,7 +8,7 @@ import (
 type User struct {
 	gorm.Model
 	Orders []Order
-	Data string `sql:"type:JSONB NOT NULL DEFAULT '{}'::JSONB"`
+	Data string `sql:"type:JSONB NOT NULL DEFAULT '{}'::JSONB" json:"-"`
 }
 
 type Order struct {
@@ -34,7 +34,7 @@ func InitDB() (*gorm.DB, error) {
 		return nil, err
 	} else {
 		/*
-		// Create models for our E-commerce API
+		// The below AutoMigrate is equivalent to this
 		if !db.HasTable("user") {
 			db.CreateTable(&User{})
 		}
@@ -43,7 +43,7 @@ func InitDB() (*gorm.DB, error) {
 			db.CreateTable(&Order{})	
 		}
 		*/
-		db.Debug().AutoMigrate(&User{}, &Order{})
+		db.AutoMigrate(&User{}, &Order{})
 		return db, nil
 	}
 }
