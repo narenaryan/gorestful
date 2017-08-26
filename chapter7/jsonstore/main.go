@@ -30,8 +30,6 @@ func (driver *DBClient) GetUsersByName(w http.ResponseWriter, r *http.Request) {
 	name := r.FormValue("name")
 	// Handle response details
 	var query = "select * from \"user\" where data->>'first_name'=?"
-	log.Println(query)
-	log.Println(name)
 	driver.db.Raw(query, name).Scan(&users)
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
