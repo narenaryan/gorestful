@@ -16,6 +16,8 @@ func main() {
 			Usage: "Should save to database (yes/no)",
 		},
 	}
+
+	app.Version = "1.0"
 	// define action
 	app.Action = func(c *cli.Context) error {
 		var args []string
