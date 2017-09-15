@@ -18,7 +18,7 @@ func main() {
 		helpers.DecodeDecryptRequest,
 		helpers.EncodeResponse)
 
-	http.Handle("/encypt", encryptHandler)
+	http.Handle("/encrypt", encryptHandler)
 	http.Handle("/decrypt", decryptHandler)
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
