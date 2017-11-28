@@ -6,9 +6,11 @@ import (
 	"net/http"
 )
 
+// CustomServeMux struct which can be a multiplexer
 type CustomServeMux struct {
 }
 
+// This is the function handler to be overridden
 func (p *CustomServeMux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path == "/" {
 		giveRandom(w, r)
@@ -23,6 +25,7 @@ func giveRandom(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	// Any struct that has serveHTTP function can be a multiplexer
 	mux := &CustomServeMux{}
 	http.ListenAndServe(":8000", mux)
 }
