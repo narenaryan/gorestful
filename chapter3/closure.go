@@ -5,18 +5,18 @@ import (
 )
 
 func main() {
-        numGenerator := generator();
-        for i := 0; i < 5; i++ {
-	    fmt.Print(numGenerator(), "\t");
+	numGenerator := generator()
+	for i := 0; i < 5; i++ {
+		fmt.Print(numGenerator(), "\t")
 	}
 }
 
-func generator() func() int{
-   var i = 0;
-   return func() int{
-       i  += 1;  
-       return i;
-    } 
+// This function returns another function
+func generator() func() int {
+	var i = 0
+	return func() int {
+		i++
+		return i
+	}
 
 }
-
