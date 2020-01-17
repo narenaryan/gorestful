@@ -2,13 +2,14 @@ package main
 
 import (
 	jsonparse "encoding/json"
-	"github.com/gorilla/mux"
-	"github.com/gorilla/rpc"
-	"github.com/gorilla/rpc/json"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
+
+	"github.com/gorilla/mux"
+	"github.com/gorilla/rpc"
+	"github.com/gorilla/rpc/json"
 )
 
 type Args struct {
@@ -16,7 +17,7 @@ type Args struct {
 }
 
 type Book struct {
-	Id     string `"json:string,omitempty"`
+	Id     string `"json:id,omitempty"`
 	Name   string `"json:name,omitempty"`
 	Author string `"json:author,omitempty"`
 }
