@@ -62,7 +62,7 @@ func CreateStation(c *gin.Context) {
 
 // RemoveStation handles the removing of resource
 func RemoveStation(c *gin.Context) {
-	id := c.Param("station-id")
+	id := c.Param("station_id")
 	statement, _ := DB.Prepare("delete from station where id=?")
 	_, err := statement.Exec(id)
 	if err != nil {
@@ -88,5 +88,5 @@ func main() {
 	r.POST("/v1/stations", CreateStation)
 	r.DELETE("/v1/stations/:station_id", RemoveStation)
 
-	r.Run(":8000") // Default listen and serve on 0.0.0.0:8080
+	r.Run(":8000") // Default listen and serve on localhost:8000
 }
