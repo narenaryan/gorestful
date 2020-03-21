@@ -67,9 +67,6 @@ func main() {
 		panic(err)
 	}
 	dbclient := &DBClient{db: db}
-	if err != nil {
-		panic(err)
-	}
 	defer db.Close()
 	// Create a new router
 	r := mux.NewRouter()

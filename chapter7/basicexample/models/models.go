@@ -14,7 +14,7 @@ func InitDB() (*sql.DB, error) {
                 return nil, err
         } else {
                 // Create model for our URL service
-                stmt, err := db.Prepare("CREATE TABLE WEB_URL(ID SERIAL PRIMARY KEY, URL TEXT NOT NULL);")
+                stmt, err := db.Prepare("CREATE TABLE IF NOT EXISTS WEB_URL(ID SERIAL PRIMARY KEY, URL TEXT NOT NULL);")
                 if err != nil {
                         log.Println(err)
                         return nil, err
