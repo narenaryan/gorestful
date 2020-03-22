@@ -1,16 +1,17 @@
 package main
 
 import (
-	"github.com/urfave/cli"
 	"log"
 	"os"
+
+	"github.com/urfave/cli"
 )
 
 func main() {
 	app := cli.NewApp()
 	// define flags
 	app.Flags = []cli.Flag{
-		cli.StringFlag{
+		&cli.StringFlag{
 			Name:  "save",
 			Value: "no",
 			Usage: "Should save to database (yes/no)",
@@ -22,8 +23,11 @@ func main() {
 	app.Action = func(c *cli.Context) error {
 		var args []string
 		if c.NArg() > 0 {
-			// Fetch arguments in a array
-			args = c.Args()
+			// Fetch arguments array
+			argsLocal := c.Args()
+			for i := 0; i < c.NArg(); i++ {
+				args = append(args, string(argsLocal.Get(i)))
+			}
 			personName := args[0]
 			marks := args[1:len(args)]
 			log.Println("Person: ", personName)
