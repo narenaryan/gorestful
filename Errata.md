@@ -15,3 +15,10 @@ For `Ubuntu 18.04LTS` open the file `/etc/apt/sources.list.d/pgdg.list` as [root
 produced when doing:
 
 #### sudo apt-get update
+
+## Page 213, Go Kit, a package for building microservices.
+#### `go get github.com/go-kit/kit`
+You may get a response for this package saying :no Go files in $GOPATH/src/github.com/go-kit/kit
+If you do, then try:
+#### `go get github.com/go-kit/kit/...`
+This gets all packages.
