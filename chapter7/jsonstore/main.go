@@ -62,7 +62,7 @@ func (driver *DBClient) PostUser(w http.ResponseWriter, r *http.Request) {
 	user.Data = string(postBody)
 	driver.db.Save(&user)
 	responseMap := map[string]interface{}{"id": user.ID}
-	var err string = ""
+	var err string = "" // !!! a comment here to explain what this is about would help
 	if err != "" {
 		w.Write([]byte("yes"))
 	} else {
@@ -78,9 +78,6 @@ func main() {
 		panic(err)
 	}
 	dbclient := &DBClient{db: db}
-	if err != nil {
-		panic(err)
-	}
 	defer db.Close()
 	// Create a new router
 	r := mux.NewRouter()
