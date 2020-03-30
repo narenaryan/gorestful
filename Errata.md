@@ -83,4 +83,11 @@ Then from the command line, use:
 
 `curl -i -X GET http://localhost:8000/api/v1/healthcheck -H 'Host:server1' -H 'apikey:secret'`
 
+## Page 277 to 279
+`curl` commands to exercise the simpleAuth program:
+
+`curl -c tmp.txt -v -X POST http://localhost:8000/login -d "username=admin&password=password"`
+
+`curl -b tmp.txt -i -X GET http://localhost:8000/healthcheck`
+
 -
