@@ -90,4 +90,23 @@ Then from the command line, use:
 
 `curl -b tmp.txt -i -X GET http://localhost:8000/healthcheck`
 
+## Page 294 and 295
+jwtAuth: when you run this example you may need to NOT have an anvironment variable `SESSION_SECRET` configured and also for it to be non exsistant.
+
+`curl` commands to exercise the jwtAuth program:
+
+`curl -X POST http://localhost:8000/getToken -d "username=admin&password=password"`
+
+This will return for example:
+
+{"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFeHBpcmVzQXQiOjE1MDAwLCJJc3N1ZWRBdCI6MTU4NTU4NzMyNSwidXNlcm5hbWUiOiJhZG1pbiJ9.XENe2HW-3O_xA2subntxzGrZe5ljinu8EjS95rlhMUQ","status":"success"}
+
+Then copy the token string between the quoutes into as an example:
+
+`curl -X GET http://localhost:8000/healthcheck -H 'access_token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJFeHBpcmVzQXQiOjE1MDAwLCJJc3N1ZWRBdCI6MTU4NTU4NzMyNSwidXNlcm5hbWUiOiJhZG1pbiJ9.XENe2HW-3O_xA2subntxzGrZe5ljinu8EjS95rlhMUQ'`
+
+to get a response like:
+
+{"time":"2020-03-30 17:56:18.499296019 +0100 BST m=+1787.715500879","user":"admin"}
+
 -
