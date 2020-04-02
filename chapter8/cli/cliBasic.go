@@ -13,12 +13,12 @@ func main() {
 
   // add flags with three arguments
   app.Flags = []cli.Flag {
-    cli.StringFlag{
+    &cli.StringFlag{
       Name: "name",
       Value: "stranger",
       Usage: "your wonderful name",
     },
-    cli.IntFlag{
+    &cli.IntFlag{
       Name: "age",
       Value: 0,
       Usage: "your graceful age",

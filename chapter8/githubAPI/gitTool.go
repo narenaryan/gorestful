@@ -3,11 +3,12 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/levigross/grequests"
-	"github.com/urfave/cli"
 	"io/ioutil"
 	"log"
 	"os"
+
+	"github.com/levigross/grequests"
+	"github.com/urfave/cli"
 )
 
 var GITHUB_TOKEN = os.Getenv("GITHUB_TOKEN")
@@ -45,14 +46,14 @@ func getStats(url string) *grequests.Response {
 
 // Reads the files provided and creates Gist on github
 func createGist(url string, args []string) *grequests.Response {
-	// get first teo arguments
+	// get first two arguments
 	description := args[0]
 	// remaining arguments are file names with path
 	var fileContents = make(map[string]File)
 	for i := 1; i < len(args); i++ {
 		dat, err := ioutil.ReadFile(args[i])
 		if err != nil {
-			log.Println("Please check the filenames. Absolute path (or) same directory are allowed")
+			log.Println("Please check the file names. Absolute path (or) same directory are allowed")
 			return nil
 		}
 		var file File
@@ -75,7 +76,7 @@ func createGist(url string, args []string) *grequests.Response {
 func main() {
 	app := cli.NewApp()
 	// define command for our client
-	app.Commands = []cli.Command{
+	app.Commands = []*cli.Command{
 		{
 			Name:    "fetch",
 			Aliases: []string{"f"},
@@ -84,8 +85,8 @@ func main() {
 				if c.NArg() > 0 {
 					// Github API Logic
 					var repos []Repo
-					user := c.Args()[0]
-					var repoUrl = fmt.Sprintf("https://api.github.com/users/%s/repos", user)
+					user := c.Args()
+					var repoUrl = fmt.Sprintf("https://api.github.com/users/%s/repos", user.Get(0))
 					resp := getStats(repoUrl)
 					resp.JSON(&repos)
 					log.Println(repos)
@@ -102,7 +103,11 @@ func main() {
 			Action: func(c *cli.Context) error {
 				if c.NArg() > 1 {
 					// Github API Logic
-					args := c.Args()
+					var args []string
+					argsLocal := c.Args()
+					for i := 0; i < c.NArg(); i++ {
+						args = append(args, string(argsLocal.Get(i)))
+					}
 					var postUrl = "https://api.github.com/gists"
 					resp := createGist(postUrl, args)
 					log.Println(resp.String())

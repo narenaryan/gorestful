@@ -13,7 +13,7 @@ type LoggingMiddleware struct {
 	Next   EncryptService
 }
 
-// Encrypt logs the encyption requests
+// Encrypt logs the encryption requests
 func (mw LoggingMiddleware) Encrypt(ctx context.Context, key string, text string) (output string, err error) {
 	defer func(begin time.Time) {
 		_ = mw.Logger.Log(
@@ -30,7 +30,7 @@ func (mw LoggingMiddleware) Encrypt(ctx context.Context, key string, text string
 	return
 }
 
-// Decrypt logs the encyption requests
+// Decrypt logs the decryption requests
 func (mw LoggingMiddleware) Decrypt(ctx context.Context, key string, text string) (output string, err error) {
 	defer func(begin time.Time) {
 		_ = mw.Logger.Log(

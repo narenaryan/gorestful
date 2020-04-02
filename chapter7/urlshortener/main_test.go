@@ -14,6 +14,6 @@ func TestGetOriginalURL(t *testing.T) {
     }
 
     if err != nil {
-    	t.Errorf("Encountered an error:", err)
+    	t.Errorf("Encountered an error: %v", err)
     }
 }

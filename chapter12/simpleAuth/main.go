@@ -37,6 +37,10 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		if password == originalPassword {
 			session.Values["authenticated"] = true
 			session.Save(r, w)
+			if err != nil {
+				http.Error(w, err.Error(), http.StatusInternalServerError)
+				return
+			}
 		} else {
 			http.Error(w, "Invalid Credentials", http.StatusUnauthorized)
 			return
@@ -58,6 +62,7 @@ func LogoutHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	log.Printf("session secret: %v", os.Getenv("SESSION_SECRET"))
 	r := mux.NewRouter()
 	r.HandleFunc("/login", LoginHandler)
 	r.HandleFunc("/healthcheck", HealthcheckHandler)
