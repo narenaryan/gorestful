@@ -17,9 +17,9 @@ type Args struct {
 }
 
 type Book struct {
-	Id     string `"json:id,omitempty"`
-	Name   string `"json:name,omitempty"`
-	Author string `"json:author,omitempty"`
+	Id     string `json:"id,omitempty"`
+	Name   string `json:"name,omitempty"`
+	Author string `json:"author,omitempty"`
 }
 
 type JSONServer struct{}
